@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= title %></title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+    <link rel='stylesheet' href='/stylesheets/bootstrap.min.css'>
+    <style type="text/css">
+      body{
+        background-image: url("images/bg.jpg");
+        background-repeat: no-repeat;
+        background-attachment: fixed;
+        background-size: cover;
+        background-position: center;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container container-fluid main" align="center">
+      <div class="main">
+        <div class="col-md-6 col-sm-9 col-12 col-xl-6 col-lg-6 login-form">
+          <form method="post" action="/login">
+            <div class="form-group" align="left">
+              <label for="username" class="col-form-label-lg">Username</label>
+              <input type="text" class="form-control" name="username" placeholder="Enter Username" required>
+            </div>
+            <div class="form-group" align="left">
+              <label for="loginPassword" class="col-form-label-lg">Login Password</label>
+              <input type="password" class="form-control" name="password" placeholder="Enter Login Password" required>
+            </div>
+            <button type="submit" class="btn btn-primary mb-4">Submit</button>
+            <button type="reset" class="btn btn-light mb-4">Reset</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Dashboard</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+    <link rel='stylesheet' href='/stylesheets/bootstrap.min.css'>
+</head>
+<body>
+<% include templates/header_auth.ejs %>
+<div class="container container-fluid" style="margin-top: 50px">
+    <% if(success.length){ %>
+        <div class="alert alert-success"><%=success%></div>
+    <%}%>
+    <div>
+        <table class="table table-hover table-responsive">
+            <tbody>
+                <tr><td>Username</td><td><%=session.passport.user.username%></td></tr>
+            </tbody>
+        </table>
+    </div>
+    <div>
+        <table class="table table-responsive table-striped table-hover">
+            <tbody>
+        <%accounts.forEach(function (item,index) {%>
+        <tr><td>Account No.</td><td><a href="/dashboard/<%=item.account_no%>"><%=item.account_no%></a></td></tr>
+        <%})%>
+            </tbody>
+        </table>
+    </div>
+    <form method="post" action="/transactions">
+        <div class="form-group">
+            <input type="number" name="txn_no" placeholder="Enter no. of transactions" class="form-control" required>
+            <br>
+            <input type="submit" class="btn btn-primary" value="Submit">
+        </div>
+    </form>
+    <%if(msg.length>0){%>
+        <div class="alert alert-info">
+            <%=msg%>
+        </div>
+    <%}%>
+</div>
+</body>
+</html>

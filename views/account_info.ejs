@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Account Info</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+    <link rel='stylesheet' href='/stylesheets/bootstrap.min.css'>
+</head>
+<body>
+<% include templates/header_auth.ejs %>
+<div class="container container-fluid" style="margin-top: 50px" align="center">
+    <%if(error_msg.length>0){%>
+        <div class="alert alert-danger"><%=error_msg%></div>
+    <%}%>
+    <%if(success_msg.length>0){%>
+        <div class="alert alert-success"><%=success_msg%></div>
+    <%}%>
+    <div align="left" class="row">
+        <div class="col-12 col-sm-12 col-md-6 col-lg-5 col-xl-5">
+            <table class="table table-responsive table-hover">
+                <tbody>
+                <tr><th>Username</th><td><%=acnt.username%></td></tr>
+                <tr><th>Account No.</th><td><%=acnt.account_no%></td></tr>
+                <tr><th>Balance</th><td><%=acnt.balance%></td></tr>
+                <tr><th>Requests</th><td><%=acnt.cheques%></td></tr>
+                </tbody>
+            </table>
+        </div>
+        <form method="post" action="/request">
+            <div class="form-group col-12 col-sm-12 col-md-6 col-lg-5 col-xl-5">
+                <input type="hidden" name="account" value="<%=acnt.account_no%>">
+                <label for="cheque" class="col-form-label">Cheques related requests</label>
+                <select name="cheque" class="form-control">
+                    <option value="0">None/Cancel All</option>
+                    <option value="1">Request New Chequebook</option>
+                    <option value="2">Request Stop pending Cheques</option>
+                    <option value="3">Request stop all pending cheques and issue new chequebook</option>
+                </select>
+                <input type="submit" value="Submit" class="btn btn-primary">
+            </div>
+        </form>
+    </div>
+    <div align="center" style="max-width: 600px">
+        <form method="post" action="/transfer">
+            <div class="form-group">
+                <input type="hidden" name="username" value="<%=acnt.username%>">
+                <input type="hidden" name="sender" value="<%=acnt.account_no%>">
+                <input type="text" name="recipient" placeholder="Enter recipient account number" class="form-control" required>
+                <input type="number" name="amount" placeholder="Enter the amount to transfer" class="form-control" required>
+                <input type="password" name="trans_password" placeholder="Enter the transaction password" class="form-control" required>
+                <input type="Submit" value="Submit" class="btn btn-primary mb-2" style="margin-top: 20px">
+            </div>
+        </form>
+    </div>
+    <div align="center">
+        <h3>Transactions</h3>
+        <div align="center">
+            <table class="table table-responsive table-hover" align="center">
+                <tbody>
+                <tr><th>S.No.</th><th>Account No.</th><th>Credit/Debit</th><th>Amount</th><th>Date/Time</th></tr>
+                <%txns.forEach(function(item,index){%>
+                    <tr>
+                        <td><%=index+1%></td>
+                        <%if(acnt.account_no==item.account_no){%>
+                            <td><%=item.receiver%></td>
+                            <td>Debit</td>
+                        <%}else{%>
+                        <td><%=item.account_no%></td>
+                        <td>Credit</td>
+                        <%}%>
+                        <td><%=item.amount%></td>
+                        <td><%=item.datetime%></td>
+                    </tr>
+                <%})%>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+</body>
+</html>

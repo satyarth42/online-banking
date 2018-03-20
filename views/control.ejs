@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Admin Panel</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+    <link rel='stylesheet' href='/stylesheets/bootstrap.min.css'>
+</head>
+<body>
+<div class="container container-fluid main" align="center">
+    <div class="main">
+        <% if(error_msg.length>0){ %>
+            <div class="alert alert-danger"><%=error_msg%></div>
+        <%}%>
+        <% if(success.length>0){ %>
+        <div class="alert alert-success"><%=success%></div>
+        <%}%>
+        <div class="col-md-6 col-sm-9 col-12 col-xl-6 col-lg-6">
+            <form method="post" action="/admin/adduser">
+                <div class="form-group" align="left">
+                    <label for="username" class="col-form-label-lg">Username</label>
+                    <input type="text" class="form-control" name="username" placeholder="Enter Username" required>
+                </div>
+                <div class="form-group" align="left">
+                    <label for="loginPassword" class="col-form-label-lg">Login Password</label>
+                    <input type="password" class="form-control" name="password" placeholder="Enter Login Password" required>
+                </div>
+                <div class="form-group" align="left">
+                    <label for="transPassword" class="col-form-label-lg">Transaction Password</label>
+                    <input type="password" class="form-control" name="trans_password" placeholder="Enter Transaction Password" required>
+                </div>
+                <div class="form-group" align="left">
+                    <label for="address" class="col-form-label-lg">Address</label>
+                    <input type="text" class="form-control" name="address" placeholder="Enter Login Password" required>
+                </div>
+                <button type="submit" class="btn btn-primary mb-4">Submit</button>
+                <button type="reset" class="btn btn-light mb-4">Reset</button>
+            </form>
+            <% if(account.length){%>
+                <div class="alert alert-success"><%=account%></div>
+            <%}%>
+            <h1>Add account no. to User</h1>
+            <form method="post" action="/admin/addaccount">
+                <div class="form-group" align="left">
+                    <label for="username" class="col-form-label-lg">Username</label>
+                    <input type="text" class="form-control" name="username" placeholder="Enter Username" required>
+                </div>
+                <div class="form-group" align="left">
+                    <label for="account_no" class="col-form-label-lg">Account No.</label>
+                    <input type="text" class="form-control" name="account" placeholder="Enter Account Number" required>
+                </div>
+                <button type="submit" class="btn btn-primary mb-4">Submit</button>
+                <button type="reset" class="btn btn-light mb-4">Reset</button>
+            </form>
+        </div>
+    </div>
+</div>
+</body>
+</html>

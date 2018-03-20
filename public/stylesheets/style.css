@@ -1,0 +1,25 @@
+body {
+  padding: 0px;
+  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+}
+
+a {
+  color: #00B7FF;
+}
+.login-form{
+  border: medium;
+  border-color: black;
+  max-width: 600px;
+  position: relative;
+  padding: 50px;
+  color: white;
+}
+.header-bar{
+  position: absolute;
+  top:0px;
+  width:100%
+}
+
+.form-control{
+  margin-bottom: 10px;
+}

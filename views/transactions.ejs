@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Account Info</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+    <link rel='stylesheet' href='/stylesheets/bootstrap.min.css'>
+</head>
+<body>
+<% include templates/header_auth.ejs %>
+<div class="container container-fluid" style="margin-top: 50px" align="center">
+    <div align="center">
+        <h3>Transactions</h3>
+        <div>
+            <table class="table table-responsive table-hover">
+                <tbody>
+                <tr><th>S.No.</th><th>Sender</th><th>Reciever</th><th>Amount</th><th>Date/Time</th></tr>
+                <% data.forEach(function(item,index){ %>
+                    <tr>
+                        <td><%=index+1%></td>
+                        <td><%=item.account_no%></td>
+                        <td><%=item.receiver%></td>
+                        <td><%=item.amount%></td>
+                        <td><%=item.datetime%></td>
+                    </tr>
+                <%})%>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+</body>
+</html>

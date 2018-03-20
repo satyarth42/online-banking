@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Account Info</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+    <link rel='stylesheet' href='/stylesheets/bootstrap.min.css'>
+</head>
+<body>
+<% include templates/header_auth.ejs %>
+<div class="container container-fluid" style="margin-top: 50px" align="center">
+    <%if(error_msg.length>0){%>
+        <div class="alert alert-danger"><%=error_msg%></div>
+    <%}%>
+    <div class="row">
+        <div align="left" class="col-lg-6 col-12 col-xl-6 col-md-10 col-sm-12">
+            <h2>Change Login Password</h2>
+            <form method="post" action="/password">
+                <input class="form-control" type="password" name="curr" placeholder="Enter Current Login Password" required>
+                <input class="form-control" type="password" name="new_pass" placeholder="Enter New Login Password" required>
+                <input class="form-control" type="password" name="conf_pass" placeholder="Confirm New Password" required>
+                <input type="submit" value="Submit" class="btn btn-primary">
+            </form>
+        </div>
+        <div align="left" class="col-lg-6 col-12 col-xl-6 col-md-10 col-sm-12">
+            <h2>Change Transaction Password</h2>
+            <form method="post" action="/password_transaction">
+                <input class="form-control" type="password" name="curr_trans" placeholder="Enter Current Transaction Password" required>
+                <input class="form-control" type="password" name="new_trans" placeholder="Enter New Transaction Password" required>
+                <input class="form-control" type="password" name="conf_trans" placeholder="Confirm New Password" required>
+                <input type="submit" value="Submit" class="btn btn-primary">
+            </form>
+        </div>
+    </div>
+        <form method="post" action="/address">
+            <div class="row" style="margin-top: 50px" align="left">
+                <div class="form-group col-12 col-sm-12 col-md-6 col-lg-7 col-xl-7">
+                    <label for="cheque" class="col-form-label">Address Change Request</label>
+                    <input type="text" class="form-control" name="address" placeholder="Enter the new address">
+                </div>
+            </div>
+            <div class="row" align="left" style="margin-left: 0px">
+                <input type="submit" value="Submit" class="btn btn-primary">
+            </div>
+        </form>
+</div>
+</body>
+</html>
