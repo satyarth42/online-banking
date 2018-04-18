@@ -41,7 +41,8 @@ router.post('/adduser',function(req,res,next){
                 "username":username,
                 "password":bcrypt.hashSync(password,10),
                 "trans_password":bcrypt.hashSync(trans_password,10),
-                "address":address
+                "address":address,
+                "attempts":3
             });
             user.save(function(err,updated){
                 if(err) console.log(err);
@@ -63,7 +64,7 @@ router.post('/addaccount',function(req,res,next){
                 "username":username,
                 "account_no":account_no,
                 "balance":0.0,
-                "cheques":"None"
+                "cheques":"None",
             });
             account.find({account_no:account_no},function (err,data) {
                 if(data.length>0){

@@ -18,6 +18,9 @@
   <body>
     <div class="container container-fluid main" align="center">
       <div class="main">
+          <% if(error.length>0){%>
+            <div class="alert alert-danger"><%=error%></div>
+          <%}%>
         <div class="col-md-6 col-sm-9 col-12 col-xl-6 col-lg-6 login-form">
           <form method="post" action="/login">
             <div class="form-group" align="left">

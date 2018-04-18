@@ -11,7 +11,7 @@ var transactions = require('../models/transactions');
 var addr_req = require('../models/addr_req');
 
 router.get('/', function(req, res, next) {
-  res.render('index', { title: 'Online Banking' });
+  res.render('index', { title: 'Online Banking',error:req.flash('error') });
 });
 
 router.post('/login', passport.authenticate('userLogin', {
@@ -28,11 +28,18 @@ passport.use('userLogin',new LocalStrategy(
                 if (err)
                     return done(err);
                 if (!user){
-                    return done(null, false, { message:'Incorrect Username/Password'});
+                    return done(null, false, { message:'Incorrect Username/Password.'});
+                }
+                if(parseInt(user.attempts)==0){
+                    return done(null,false,{message:'User is blocked. Contact the bank.'})
                 }
                 if (!isValidPassword(user, password)){
-                    return done(null, false, { message:'Incorrect Username/Password'});
+                    user.attempts = parseInt(user.attempts)-1;
+                    user.save();
+                    return done(null, false, { message:'Incorrect Username/Password. You have '+user.attempts+' attempt(s) remaining'});
                 }
+                user.attempts=3;
+                user.save();
                 return done(null, user,{message:'You have Logged In successfully'});
             }
         );

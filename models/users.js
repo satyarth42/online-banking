@@ -14,8 +14,11 @@ var userSchema = new schema({
         type:String,
         required:true
     },
-    "address":{
-        type:String,
+    "address": {
+        type: String,
+    },
+    "attempts":{
+        type:Number
     }
 },{collection:'users'});
 
